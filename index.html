@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>캐러셀</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <article id="app">
+      <h1 class="title">2022년 띠 별 운세</h1>
+      <ul class="list-item"></ul>
+    </article>
+    <script>
+      const center = document.querySelector(".list-item");
+
+      const arrPic = [
+        {
+          title: "쥐띠",
+          img: "./images/쥐.gif",
+          content:
+            " 막혔던 실마리가 풀리고 순조로운 성취가 있습니다. 분주하고 바쁜 한 해가 될 것이며, 특히 직장이나 집 등 주변 환경의 갑작스러운 변화가 예상되는 시기입니다. 행운은 멀리에서 오거나 예상치 못한 곳에서 갑자기 올 수도 있습니다.",
+        },
+        {
+          title: "소띠",
+
+          img: "./images/소.gif",
+          content:
+            "모든 것은 시간이 해결해 주니 때를 기다리세요! 무리한 욕심은 버리고 묵묵히 자신의 일에 전념하다 보면 당장은 노력에 비해 결실이 부족해 보이지만 끝내는 행운을 가져오게 될 것입니다.",
+        },
+        {
+          title: "호랑이띠",
+          img: "./images/호랑이.gif",
+          content:
+            "당장은 조금 어려워도 결국 행운과 결실로 이어집니다. 가급적 개인적인 목적보다는 공적 명분을 중시하는 것이 좋습니다. 사욕을 우선하면 얻는 것보다 잃는 것이 많을 수 있지만 사욕이나 작은 욕심보다 명분을 추구하고, 멀리 보며 처신하게 되면 큰 결실을 이루게 됩니다.",
+        },
+        {
+          title: "토끼띠",
+          img: "./images/토끼.gif",
+          content:
+            "노력한 일이 결실로 이어집니다. 이제까지 꾸준하게 노력해 왔던 일에 대한 큰 결실이 나타나는 한 해가 될 수 있습니다.이제까지 힘들었던 토끼띠는 우연한 만남이 깊은 인연이나 귀인으로 발전하게 되고, 막혔던 일은 실마리가 서서히 풀리기 시작하는 시기입니다.",
+        },
+        {
+          title: "용띠",
+          img: "./images/용.gif",
+          content:
+            "조금만 더 힘내세요! 행운의 여신이 바로 앞에 있으니… 운이 다소 약한 용띠 분들도 원하는 바 나름의 성과를 얻게 되고, 추진해 오던 일들에서 나름의 성과를 보게 되며, 뜻하지 않은 곳에서 예상치 못했던 기쁨과 행운이 찾아오기도 합니다.",
+        },
+        {
+          title: "뱀띠",
+          img: "./images/뱀.gif",
+          content:
+            "귀인의 도움으로 명예와 행운이 뒤따르는 운입니다. 행운의 여신이 함께 하니 한꺼번에 여러 가지 일이 동시에 해결되거나 실마리가 찾아지며, 그간 머리를 아프게 했던 일의 해결책이 나오기 시작하고, 성과가 나타나는 시기이니 성실하고 꾸준한 노력이 필요합니다.",
+        },
+        {
+          title: "말띠",
+          img: "./images/말.gif",
+          content:
+            "겸손하면 행운이 뒤따르고 쏠쏠한 결실도 이룹니다. 그러나 인정을 받거나 실리와 명예를 얻었다 하여 겸손함을 잃고 지나치게 과신하거나 거만해지면 복이 화로 변할 수도 있습니다. 겸손을 잃게 되면 큰 낭패를 보게 되고, 얻은 것보다 잃는 것이 더 많을 수도 있습니다.",
+        },
+        {
+          title: "양띠",
+          img: "./images/양.gif",
+          content:
+            "성실함과 꾸준한 노력이 성공의 비결입니다. 운이 다소 약한 양띠 분들은 일은 이루어지지만 원하는 시기보다 조금 늦게 이뤄질 수 있고, 본의 아닌 실수나 주변 사람의 실수 등으로 오해가 생기거나 작은 문제가 생길 수도 있습니다.",
+        },
+        {
+          title: "원숭이띠",
+          img: "./images/원숭이.gif",
+          content:
+            "신중함과 양보가 더 큰 행운을 가져옵니다. 행운이 다가오면서 함정도 같이 있을 수 있으니 마음이 급해도 매사 신중하게 한발 양보하는 지혜가 필요합니다. 마음의 여유를 가지고 작은 이익은 양보하고 묵묵히 자신의 일에 전념하다 보면 좋은 기회가 제공됩니다.",
+        },
+        {
+          title: "닭띠",
+          img: "./images/닭.gif",
+          content:
+            "조금 더 참으세요! 어차피 태양은 떠오릅니다! 너무 서두르게 되면 또 다른 일이 문제를 일으켜 오히려 더 번거로워질 수 있습니다. 서두를수록 더욱 어려워지고 늦게 풀리게 될 수 있으니, 마음이 급해도 한발 양보하는 여유와 느긋함으로 조금 더 참고 기다리는 것이 성공의 열쇠입니다",
+        },
+        {
+          title: "강아지띠",
+          img: "./images/강아지.gif",
+          content:
+            "욕심을 버리고 꾸준히 노력해야 성공도 따라옵니다! 생각보다 가까운 곳에 귀인이 있고, 의외의 곳에서 좋은 일이 생길 수 있으니 눈앞의 작은 욕심이나 어려움보다 더 열린 마음으로 주위를 둘러보며 성실함을 유지하면 충분한 성과를 볼 수 있습니다.",
+        },
+        {
+          title: "돼지띠",
+          img: "./images/돼지.gif",
+          content:
+            " 성공과 재물이 따릅니다! 그간 머리 아프게 했던 일들도 해결책이 나오게 되며, 행운이 따르는 시기이니 조금만 더 꾸준한 노력을 기울인다면 그간의 노력에 대한 충분한 보상을 받을 것입니다. 기쁨은 나눌수록 커지게 되니 베풀 수 있을 때 최대한 베풀면 결국 더 큰 복이 되어 돌아올 것입니다",
+        },
+      ];
+
+      // 동적으로 추가
+      arrPic.forEach((item) => {
+        const elLi = document.createElement("li");
+        elLi.innerHTML = `<h2>${item.title}</h2><img src=${item.img} alt=''><p> ${item.content}</p>`;
+        center.appendChild(elLi);
+      });
+
+      const items = center.querySelectorAll("li");
+
+      // 반지름
+
+      const radius = 30 + (items[0].offsetWidth * items.length) / 3.14 / 2;
+
+      items.forEach((item, index) => {
+        if (index === 0) {
+          item.style.transform = `rotateY(0) translateZ(${radius}px)`;
+        } else {
+          item.style.transform = `rotateY(${
+            (360 / items.length) * index
+          }deg) translateZ(${radius}px)`;
+        }
+      });
+
+      const angle = 360 / items.length; //item갯수에따른 angle 각도
+      let currAngle = 0; //현재 앵글
+
+      document.addEventListener("click", (e) => {
+        if (window.innerWidth / 2 < event.clientX) {
+          //오른쪽 클릭시
+          currAngle -= angle;
+        } else {
+          currAngle += angle; //왼쪽클릭시
+        }
+
+        // translate(-50%,-50%) : 중앙정렬
+        center.style.transform = `translate(-50%,-50%) rotateY(${currAngle}deg)`;
+      });
+    </script>
+  </body>
+</html>
